@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quant Researcher & Algo Designer — Complete Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#020c04;--bg2:#040f06;--bg3:#071209;--surface:#0b1c0e;
+  --border:#143318;--border2:#1d4a22;
+  --green:#00ff41;--green2:#00cc33;--green3:#009922;--green4:#006614;--green-dim:#004d10;
+  --amber:#ffb800;--red:#ff3333;--cyan:#00e5ff;
+  --white:#e8f5e9;--muted:#4a7a50;--faint:#1a3a1e;
+  --sidebar:220px;
+  --font:'IBM Plex Mono',monospace;--font-sans:'IBM Plex Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--green);font-family:var(--font);font-size:13px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.012) 2px,rgba(0,255,65,.012) 4px);pointer-events:none;z-index:9999}
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65) 100%);pointer-events:none;z-index:9998}
+
+.ticker{background:var(--green4);border-bottom:1px solid var(--green3);overflow:hidden;white-space:nowrap;padding:5px 0;position:relative;z-index:200}
+.ticker-inner{display:inline-block;animation:tick 50s linear infinite}
+.ticker-inner span{padding:0 28px;font-size:10px;letter-spacing:.06em}
+.t-up{color:var(--green)}.t-am{color:var(--amber)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.layout{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:calc(100vh - 28px)}
+
+.sidebar{border-right:1px solid var(--border2);background:var(--bg2);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--green4)}
+.sb-logo{padding:16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.sb-logo-main{font-size:11px;font-weight:600;color:var(--green);letter-spacing:.05em;line-height:1.3}
+.sb-logo-sub{font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.08em}
+.sb-sec{padding:8px 0;border-bottom:1px solid var(--border)}
+.sb-sec-title{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--green4);padding:6px 14px 4px}
+.sb-link{display:flex;align-items:center;gap:7px;padding:5px 14px;font-size:11px;color:var(--muted);cursor:pointer;transition:all .15s;border-left:2px solid transparent;text-decoration:none}
+.sb-link:hover{color:var(--green);background:var(--bg3);border-left-color:var(--green3)}
+.sb-link.active{color:var(--green);border-left-color:var(--green);background:var(--surface)}
+.sb-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.sb-cnt{margin-left:auto;font-size:9px;color:var(--green4);background:var(--bg3);padding:1px 5px;border-radius:2px}
+
+.main{display:flex;flex-direction:column;min-height:100vh}
+
+.hero{padding:36px 48px 28px;border-bottom:1px solid var(--border2);background:var(--bg2);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-80px;right:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,65,.04) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:9px;letter-spacing:.22em;color:var(--green3);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.blink{animation:blink 1s step-end infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero h1{font-size:clamp(22px,3vw,38px);font-weight:600;color:var(--green);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 30px rgba(0,255,65,.25)}
+.hero h1 .dim{color:var(--green3);font-weight:300}
+.hero-sub{font-family:var(--font-sans);font-size:14px;color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:20px}
+.hero-targets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.target{font-size:10px;padding:3px 10px;border:1px solid var(--green4);color:var(--green3);letter-spacing:.07em;transition:all .15s;cursor:default}
+.target:hover{border-color:var(--green);color:var(--green)}
+.target.hot{border-color:var(--amber);color:var(--amber)}
+
+.stats-row{display:flex;gap:0;border:1px solid var(--border2);width:fit-content;flex-wrap:wrap}
+.stat-box{padding:10px 20px;border-right:1px solid var(--border2);text-align:center}
+.stat-box:last-child{border-right:none}
+.stat-num{font-size:22px;font-weight:600;color:var(--green);display:block;text-shadow:0 0 10px rgba(0,255,65,.3)}
+.stat-num.am{color:var(--amber)}
+.stat-lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+.prog-row{margin-top:20px;display:flex;align-items:center;gap:12px}
+.prog-track{flex:1;max-width:280px;height:2px;background:var(--green4);overflow:hidden}
+.prog-fill{height:100%;background:var(--green);width:0%;transition:width .5s;box-shadow:0 0 6px var(--green)}
+.prog-txt{font-size:10px;color:var(--muted)}
+
+.controls{padding:10px 48px;border-bottom:1px solid var(--border);background:rgba(2,12,4,.92);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.prompt{color:var(--green3);font-size:12px;flex-shrink:0}
+.search-input{background:transparent;border:none;border-bottom:1px solid var(--green4);color:var(--green);font-family:var(--font);font-size:12px;padding:3px 8px;outline:none;width:200px;caret-color:var(--green)}
+.search-input:focus{border-color:var(--green)}.search-input::placeholder{color:var(--green4)}
+.ctrl-sep{color:var(--border2);flex-shrink:0}
+.type-filters{display:flex;gap:4px;flex-wrap:wrap}
+.tf{padding:3px 10px;border:1px solid var(--green4);background:transparent;color:var(--muted);font-family:var(--font);font-size:10px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.tf:hover{border-color:var(--green3);color:var(--green3)}
+.tf.active{background:var(--green);border-color:var(--green);color:var(--bg)}
+
+.content{padding:28px 48px 60px;flex:1}
+
+.tc-wrap{margin-bottom:28px}
+.tc-title{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--green4);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.tc-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px}
+.tag-pill{font-size:10px;padding:2px 8px;border:1px solid var(--faint);color:var(--muted);cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.tag-pill:hover{border-color:var(--green3);color:var(--green3)}
+.tag-pill.active{background:var(--green);border-color:var(--green);color:var(--bg)}
+
+.phases-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.phases-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.phase{border:1px solid var(--border);background:var(--bg2);margin-bottom:8px;transition:border-color .15s}
+.phase:hover{border-color:var(--border2)}
+.phase.open{border-color:var(--green3)}
+.phase.done{border-left:3px solid var(--green)}
+.phase.hidden{display:none}
+
+.phase-head{display:grid;grid-template-columns:60px 26px 1fr auto auto auto;align-items:center;cursor:pointer;padding:14px 0}
+.phase-head:hover .phase-name{color:var(--green);text-shadow:0 0 10px rgba(0,255,65,.3)}
+
+.ph-id{text-align:center;font-size:9px;color:var(--green4);letter-spacing:.12em;padding:0 10px;border-right:1px solid var(--border);line-height:1.5}
+.ph-dot-col{display:flex;justify-content:center}
+.ph-dot{width:6px;height:6px;border-radius:50%;border:1px solid currentColor;transition:box-shadow .2s}
+.phase.open .ph-dot,.phase-head:hover .ph-dot{box-shadow:0 0 6px currentColor}
+.ph-main{padding:0 18px}
+.ph-cat{font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+.phase-name{font-size:14px;font-weight:500;color:var(--white);transition:all .15s;margin-bottom:4px}
+.ph-desc{font-size:11px;color:var(--muted);font-family:var(--font-sans);line-height:1.5;margin-bottom:6px}
+.ph-tags{display:flex;gap:4px;flex-wrap:wrap}
+.ptag{font-size:9px;padding:1px 6px;border:1px solid var(--faint);color:var(--green4);letter-spacing:.04em}
+.ph-badge{padding:0 14px;font-size:9px;color:var(--green);opacity:0;transition:opacity .2s;white-space:nowrap}
+.phase.done .ph-badge{opacity:1}
+.ph-time{padding:0 14px;font-size:10px;color:var(--muted);border-left:1px solid var(--border);white-space:nowrap}
+.ph-chev{padding:0 14px;color:var(--green4);font-size:11px;transition:transform .2s;flex-shrink:0}
+.phase.open .ph-chev{transform:rotate(180deg)}
+
+.phase-body{display:none;border-top:1px solid var(--border);background:var(--bg3);padding:20px 24px}
+.phase.open .phase-body{display:block}
+.body-layout{display:grid;grid-template-columns:1fr 260px;gap:20px}
+@media(max-width:900px){.body-layout{grid-template-columns:1fr}}
+
+.sec-head{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--green4);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-head::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.res-type-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.rtt{font-size:9px;padding:2px 8px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;letter-spacing:.05em;text-transform:uppercase;background:transparent;font-family:var(--font)}
+.rtt:hover{border-color:var(--border2);color:var(--green3)}
+.rtt.on{background:var(--surface);border-color:var(--border2);color:var(--green)}
+
+.resources{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:7px}
+.res-card{background:var(--bg2);border:1px solid var(--border);padding:11px 13px;text-decoration:none;display:block;transition:all .15s;position:relative;overflow:hidden}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.res-card:hover{border-color:var(--border2);background:var(--surface)}
+.res-card:hover::before{transform:scaleX(1)}
+.res-card.hidden{display:none}
+.rb{font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;margin-bottom:7px;display:inline-block;border-radius:2px}
+.rb-paper {background:rgba(0,255,65,.08);color:#00cc33;border:1px solid rgba(0,255,65,.2)}
+.rb-book  {background:rgba(0,229,255,.08);color:#00e5ff;border:1px solid rgba(0,229,255,.2)}
+.rb-course{background:rgba(255,184,0,.08);color:#ffb800;border:1px solid rgba(255,184,0,.2)}
+.rb-article{background:rgba(255,255,255,.05);color:#aaa;border:1px solid rgba(255,255,255,.08)}
+.rb-youtube{background:rgba(180,0,255,.08);color:#cc66ff;border:1px solid rgba(180,0,255,.2)}
+.rb-docs  {background:rgba(0,153,34,.08);color:#009922;border:1px solid rgba(0,153,34,.25)}
+.rb-tool  {background:rgba(255,51,51,.08);color:#ff6666;border:1px solid rgba(255,51,51,.2)}
+.res-name{font-size:12px;font-weight:500;color:var(--white);line-height:1.4;margin-bottom:3px}
+.res-note{font-size:10px;color:var(--muted);font-family:var(--font-sans);line-height:1.4}
+.res-arrow{margin-top:7px;font-size:9px;color:var(--green4);transition:color .15s}
+.res-card:hover .res-arrow{color:var(--green)}
+
+.milestones-box{background:var(--bg2);border:1px solid var(--border);padding:14px;margin-bottom:10px}
+.m-item{display:flex;align-items:baseline;gap:7px;padding:4px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--white);font-family:var(--font-sans)}
+.m-item:last-child{border:none}
+.m-arr{font-size:10px;flex-shrink:0}
+.mark-btn{width:100%;padding:8px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-family:var(--font);font-size:10px;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.mark-btn:hover{border-color:var(--green3);color:var(--green3)}
+.phase.done .mark-btn{border-color:var(--green);color:var(--green);background:rgba(0,255,65,.05)}
+
+footer{padding:16px 48px;border-top:1px solid var(--border2);background:var(--bg2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;position:relative;z-index:10}
+footer span{font-size:9px;color:var(--green4);letter-spacing:.07em}
+
+.back-top{position:fixed;bottom:24px;right:24px;width:36px;height:36px;background:var(--bg2);border:1px solid var(--border2);color:var(--green3);font-family:var(--font);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all .2s;z-index:500}
+.back-top.show{opacity:1}.back-top:hover{border-color:var(--green);color:var(--green)}
+
+.d-math{background:#00e5ff}.d-cs{background:#ffb800}.d-stats{background:#cc66ff}
+.d-finance{background:#00ff41}.d-algo{background:#ff6666}.d-trading{background:#66ffcc}.d-practice{background:#ffcc00}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}.sidebar{display:none}
+  .hero,.controls,.content,footer{padding-left:16px;padding-right:16px}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.phase{animation:fadeIn .25s ease both}
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="ticker-inner">
+  <span class="t-up">TOWER RESEARCH ▲ 12.4%</span><span class="t-am">SHARPE: 3.2</span>
+  <span class="t-up">JANE STREET ▲ 8.1%</span><span class="t-am">WIN RATE: 54.8%</span>
+  <span class="t-up">CITADEL SECURITIES ▲ 15.7%</span><span class="t-am">AVG HOLD: 3.4ms</span>
+  <span class="t-up">TWO SIGMA ▲ 9.3%</span><span class="t-am">ALPHA: 0.0021/trade</span>
+  <span class="t-up">DE SHAW ▲ 11.2%</span><span class="t-am">TARGET: ₹50–90 LPA</span>
+  <span class="t-up">OPTIVER ▲ 7.8%</span><span class="t-am">MAX DD: -2.1%</span>
+  <span class="t-up">WORLDQUANT ▲ 6.9%</span><span class="t-am">13 PHASES · 300+ RESOURCES</span>
+  <span class="t-up">TOWER RESEARCH ▲ 12.4%</span><span class="t-am">SHARPE: 3.2</span>
+  <span class="t-up">JANE STREET ▲ 8.1%</span><span class="t-am">WIN RATE: 54.8%</span>
+  <span class="t-up">CITADEL SECURITIES ▲ 15.7%</span><span class="t-am">AVG HOLD: 3.4ms</span>
+  <span class="t-up">TWO SIGMA ▲ 9.3%</span><span class="t-am">ALPHA: 0.0021/trade</span>
+  <span class="t-up">DE SHAW ▲ 11.2%</span><span class="t-am">TARGET: ₹50–90 LPA</span>
+  <span class="t-up">OPTIVER ▲ 7.8%</span><span class="t-am">MAX DD: -2.1%</span>
+  <span class="t-up">WORLDQUANT ▲ 6.9%</span><span class="t-am">13 PHASES · 300+ RESOURCES</span>
+</div></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-main">QUANT / ALGO<br>ROADMAP</div>
+    <div class="sb-logo-sub">₹50–90 LPA TARGET · 2025</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-sec-title">Navigation</div>
+    <a class="sb-link active" onclick="scrollToTop()"><div class="sb-dot" style="background:#00ff41"></div>Overview</a>
+    <a class="sb-link" onclick="jumpTo('phase-1')"><div class="sb-dot d-math"></div>Math Foundations<span class="sb-cnt">10</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-2')"><div class="sb-dot d-math"></div>Probability Theory<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-3')"><div class="sb-dot d-math"></div>Stochastic Calculus<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-4')"><div class="sb-dot d-cs"></div>Programming &amp; DSA<span class="sb-cnt">9</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-5')"><div class="sb-dot d-cs"></div>Competitive Prog.<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-6')"><div class="sb-dot d-stats"></div>Statistics &amp; Econometrics<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-7')"><div class="sb-dot d-stats"></div>ML for Quant<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-8')"><div class="sb-dot d-finance"></div>Market Microstructure<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-9')"><div class="sb-dot d-finance"></div>Portfolio &amp; Risk<span class="sb-cnt">8</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-10')"><div class="sb-dot d-algo"></div>Strategy Design<span class="sb-cnt">9</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-11')"><div class="sb-dot d-trading"></div>Trading Infrastructure<span class="sb-cnt">9</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-12')"><div class="sb-dot d-trading"></div>Execution Algorithms<span class="sb-cnt">7</span></a>
+    <a class="sb-link" onclick="jumpTo('phase-13')"><div class="sb-dot d-practice"></div>Interview Prep<span class="sb-cnt">10</span></a>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-sec-title">Categories</div>
+    <a class="sb-link" onclick="setFilter('all',this)"><div class="sb-dot" style="background:#00ff41"></div>All Phases</a>
+    <a class="sb-link" onclick="setFilter('math',this)"><div class="sb-dot d-math"></div>Math<span class="sb-cnt">3</span></a>
+    <a class="sb-link" onclick="setFilter('cs',this)"><div class="sb-dot d-cs"></div>CS / Programming<span class="sb-cnt">2</span></a>
+    <a class="sb-link" onclick="setFilter('stats',this)"><div class="sb-dot d-stats"></div>Stats / ML<span class="sb-cnt">2</span></a>
+    <a class="sb-link" onclick="setFilter('finance',this)"><div class="sb-dot d-finance"></div>Finance<span class="sb-cnt">2</span></a>
+    <a class="sb-link" onclick="setFilter('algo',this)"><div class="sb-dot d-algo"></div>Algo Strategy<span class="sb-cnt">1</span></a>
+    <a class="sb-link" onclick="setFilter('trading',this)"><div class="sb-dot d-trading"></div>Trading Systems<span class="sb-cnt">2</span></a>
+    <a class="sb-link" onclick="setFilter('practice',this)"><div class="sb-dot d-practice"></div>Practice<span class="sb-cnt">1</span></a>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-sec-title">Resource Types</div>
+    <a class="sb-link" onclick="setGlobalType('Paper',this)"><div class="sb-dot" style="background:#00cc33"></div>Papers</a>
+    <a class="sb-link" onclick="setGlobalType('Book',this)"><div class="sb-dot" style="background:#00e5ff"></div>Books</a>
+    <a class="sb-link" onclick="setGlobalType('Course',this)"><div class="sb-dot" style="background:#ffb800"></div>Courses</a>
+    <a class="sb-link" onclick="setGlobalType('Article',this)"><div class="sb-dot" style="background:#aaa"></div>Articles</a>
+    <a class="sb-link" onclick="setGlobalType('YouTube',this)"><div class="sb-dot" style="background:#cc66ff"></div>YouTube</a>
+    <a class="sb-link" onclick="setGlobalType('Tool',this)"><div class="sb-dot" style="background:#ff6666"></div>Tools</a>
+    <a class="sb-link" onclick="setGlobalType('Docs',this)"><div class="sb-dot" style="background:#009922"></div>Docs</a>
+  </div>
+</aside>
+
+<div class="main">
+<div class="hero">
+  <div class="hero-eyebrow"><span class="blink">█</span> COMPLETE CURRICULUM 2025</div>
+  <h1>QUANTITATIVE RESEARCHER<br><span class="dim">&amp; ALGORITHM DESIGNER</span></h1>
+  <p class="hero-sub">Everything you need to land ₹50–90 LPA at Tower Research Capital, Jane Street, Citadel, DE Shaw, Two Sigma, and Optiver — math, probability, stochastic calculus, programming, statistics, microstructure, strategy design, and trading systems in one place.</p>
+  <div class="hero-targets">
+    <span class="target hot">Tower Research Capital</span>
+    <span class="target hot">Jane Street</span>
+    <span class="target hot">Citadel Securities</span>
+    <span class="target">DE Shaw</span>
+    <span class="target">Two Sigma</span>
+    <span class="target">Optiver</span>
+    <span class="target">WorldQuant</span>
+    <span class="target">SIG</span>
+    <span class="target">IMC Trading</span>
+    <span class="target">Jump Trading</span>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-num" id="topic-count">0</span><span class="stat-lbl">Unique Topics</span></div>
+    <div class="stat-box"><span class="stat-num" id="res-count">0</span><span class="stat-lbl">Resources</span></div>
+    <div class="stat-box"><span class="stat-num">7</span><span class="stat-lbl">Categories</span></div>
+    <div class="stat-box"><span class="stat-num">13</span><span class="stat-lbl">Phases</span></div>
+    <div class="stat-box"><span class="stat-num am" id="done-count">0</span><span class="stat-lbl">Complete</span></div>
+  </div>
+  <div class="prog-row">
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <span class="prog-txt" id="prog-txt">0 / 13 phases complete</span>
+  </div>
+</div>
+
+<div class="controls">
+  <span class="prompt">&gt;_</span>
+  <input class="search-input" id="search" placeholder="search topics, papers, tools..." oninput="doSearch(this.value)">
+  <span class="ctrl-sep">│</span>
+  <div class="type-filters">
+    <button class="tf active" onclick="setGlobalType('All',this)">All</button>
+    <button class="tf" onclick="setGlobalType('Paper',this)">Papers</button>
+    <button class="tf" onclick="setGlobalType('Book',this)">Books</button>
+    <button class="tf" onclick="setGlobalType('Course',this)">Courses</button>
+    <button class="tf" onclick="setGlobalType('Article',this)">Articles</button>
+    <button class="tf" onclick="setGlobalType('YouTube',this)">YouTube</button>
+    <button class="tf" onclick="setGlobalType('Tool',this)">Tools</button>
+    <button class="tf" onclick="setGlobalType('Docs',this)">Docs</button>
+  </div>
+</div>
+
+<div class="content">
+  <div class="tc-wrap">
+    <div class="tc-title">Topic Index</div>
+    <div class="tag-cloud" id="tag-cloud"></div>
+  </div>
+  <div class="phases-title">Learning Roadmap — 13 Phases</div>
+  <div id="phases-container"></div>
+</div>
+
+<footer>
+  <span>QUANT / ALGO ROADMAP · 2025 · 13 PHASES · 300+ RESOURCES</span>
+  <span>TARGET: TOWER · JANE STREET · CITADEL · DE SHAW · ₹50–90 LPA</span>
+</footer>
+</div>
+</div>
+
+<button class="back-top" id="back-top" onclick="scrollToTop()">↑</button>
+
+<script>
+const DATA=[
+{id:1,cat:"math",time:"8–10 wk",name:"Mathematical Foundations",
+ desc:"Calculus, linear algebra, real analysis, discrete math — absolute bedrock. No shortcuts here.",
+ tags:["Multivariable calculus","Linear algebra","Real analysis","Convex optimization","Combinatorics","Graph theory","Series & sequences","Eigendecomposition","SVD","Gradient descent","Lagrange multipliers","Fourier analysis","Measure theory basics","Number theory"],
+ resources:[
+  {type:"Book",name:"Calculus — Spivak",note:"Rigorous analysis-level calculus; builds mathematical maturity",url:"https://www.amazon.com/Calculus-4th-Michael-Spivak/dp/0914098918"},
+  {type:"Book",name:"Linear Algebra Done Right — Axler",note:"Proof-based; eigenvalues, SVD, spectral theorem",url:"https://linear.axler.net"},
+  {type:"Book",name:"Introduction to Linear Algebra — Strang",note:"Applied complement to Axler; MIT 18.06",url:"https://math.mit.edu/~gs/linearalgebra"},
+  {type:"Course",name:"MIT 18.02 — Multivariable Calculus (OCW)",note:"Full lectures, exams, problem sets; free",url:"https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010"},
+  {type:"Book",name:"Principles of Mathematical Analysis — Rudin",note:"Baby Rudin — real analysis; required for quant theory",url:"https://www.mheducation.com"},
+  {type:"Book",name:"Concrete Mathematics — Knuth et al.",note:"Combinatorics and discrete math for CS/algo",url:"https://www.amazon.com/Concrete-Mathematics-Foundation-Computer-Science/dp/0201558025"},
+  {type:"Course",name:"MIT 18.06 — Linear Algebra (Strang OCW)",note:"Best LA course on earth; 34 lectures free",url:"https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010"},
+  {type:"Book",name:"How to Prove It — Velleman",note:"Proof techniques; essential for theory to practice bridge",url:"https://www.cambridge.org/9781108439534"},
+  {type:"YouTube",name:"3Blue1Brown — Essence of Linear Algebra",note:"Visual intuition before diving into proofs",url:"https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"},
+  {type:"YouTube",name:"3Blue1Brown — Essence of Calculus",note:"Visual series; excellent for geometric intuition",url:"https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr"},
+ ],
+ milestones:["Prove Cauchy-Schwarz from scratch","Implement eigendecomposition in NumPy and verify","Solve 50 competition-level combinatorics problems","Derive gradient descent convergence rate for convex functions"]},
+
+{id:2,cat:"math",time:"6–8 wk",name:"Probability Theory",
+ desc:"Measure-theoretic probability, random variables, distributions, CLT, LLN, martingales, stochastic processes.",
+ tags:["Measure theory","Random variables","CLT","LLN","Martingales","Conditional expectation","Poisson process","Brownian motion","Markov chains","Bayesian inference","Characteristic functions","Convergence modes","Ergodic theory","Renewal theory"],
+ resources:[
+  {type:"Book",name:"Probability — Durrett",note:"Graduate-level; measure-theoretic; the standard reference",url:"https://services.math.duke.edu/~rtd/PTE/pte.html"},
+  {type:"Book",name:"A First Course in Probability — Sheldon Ross",note:"Accessible undergraduate; excellent exercises",url:"https://www.pearson.com"},
+  {type:"Book",name:"Probability Theory: Logic of Science — Jaynes",note:"Bayesian foundation; essential perspective for inference",url:"https://www.cambridge.org/9780521592710"},
+  {type:"Course",name:"MIT 6.041 — Probabilistic Systems (OCW)",note:"25-lecture course; Bertsekas — free",url:"https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010"},
+  {type:"Book",name:"Fifty Challenging Problems — Mosteller",note:"Classic brainteasers used verbatim in quant interviews",url:"https://www.amazon.com/Fifty-Challenging-Problems-Probability-Solutions/dp/0486653552"},
+  {type:"Book",name:"Introduction to Stochastic Processes — Lawler",note:"Markov chains, Brownian motion, Itô primer",url:"https://www.amazon.com/Introduction-Stochastic-Processes-Gregory-Lawler/dp/1584886099"},
+  {type:"Book",name:"All of Statistics — Wasserman",note:"Compact probability + statistics; free PDF",url:"https://www.stat.cmu.edu/~larry/all-of-statistics"},
+  {type:"YouTube",name:"MIT 6.041 Lecture Videos — Tsitsiklis",note:"Full lecture recordings; exceptional clarity",url:"https://www.youtube.com/playlist?list=PLUl4u3cNGP60hI9ATjSFgLZpbNJ7myAg6"},
+ ],
+ milestones:["Prove CLT using characteristic functions","Solve all 50 Mosteller problems","Implement Monte Carlo estimator; verify CLT convergence","Prove optional stopping theorem for martingales"]},
+
+{id:3,cat:"math",time:"5–7 wk",name:"Stochastic Calculus & Financial Math",
+ desc:"Itô calculus, SDEs, Black-Scholes derivation, risk-neutral measure, change of measure, martingale pricing.",
+ tags:["Itô lemma","SDEs","Black-Scholes","Risk-neutral measure","Girsanov theorem","Feynman-Kac","Greeks","PDE methods","Filtrations","Stopping times","HJB equation","Affine models","Vasicek model","CIR model"],
+ resources:[
+  {type:"Book",name:"Stochastic Calculus for Finance II — Shreve",note:"The definitive text; Vol II continuous time finance",url:"https://www.springer.com/gp/book/9780387401010"},
+  {type:"Book",name:"Stochastic Calculus for Finance I — Shreve",note:"Vol I: discrete time, binomial model, no-arbitrage",url:"https://www.springer.com/gp/book/9780387249681"},
+  {type:"Book",name:"Paul Wilmott on Quantitative Finance (3 vols)",note:"Practical bible; PDEs, exotics, volatility, calibration",url:"https://www.wiley.com/en-us/Paul+Wilmott+on+Quantitative+Finance-p-9780470018705"},
+  {type:"Book",name:"Options, Futures, Other Derivatives — Hull",note:"Standard university derivative pricing text; 11th ed",url:"https://www.pearson.com"},
+  {type:"Course",name:"MIT 18.S096 — Math for Finance (OCW)",note:"SDEs, martingales, arbitrage pricing; free",url:"https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013"},
+  {type:"Paper",name:"Black-Scholes-Merton 1973 Original Paper",note:"Read the Nobel Prize paper — understand every line",url:"https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf"},
+  {type:"Book",name:"Arbitrage Theory in Continuous Time — Björk",note:"Clean martingale pricing; excellent exercises",url:"https://global.oup.com/academic/product/arbitrage-theory-in-continuous-time-9780199574742"},
+  {type:"YouTube",name:"MIT 18.S096 — Full Video Lectures",note:"Professor Kardar and guests — all filmed",url:"https://www.youtube.com/playlist?list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR"},
+ ],
+ milestones:["Derive Black-Scholes PDE from Itô lemma — every step","Price European option via Monte Carlo vs closed form","Implement full Greeks calculator; delta-hedge portfolio daily","Calibrate Vasicek model to yield curve data"]},
+
+{id:4,cat:"cs",time:"8–10 wk",name:"Programming & Data Structures",
+ desc:"Python, C++, data structures, algorithm complexity — quant firms test this rigorously in round 1.",
+ tags:["Python internals","C++ templates","Arrays & hash maps","Trees & heaps","Graphs","Time & space complexity","Memory layout","SIMD","Cache optimization","Profiling","STL internals","Concurrency","Iterators","Smart pointers"],
+ resources:[
+  {type:"Book",name:"Effective Modern C++ — Scott Meyers",note:"C++11/14 best practices; HFT firms run C++",url:"https://www.oreilly.com/library/view/effective-modern-c/9781491908419"},
+  {type:"Book",name:"The C++ Programming Language — Stroustrup",note:"Definitive reference; templates, STL, move semantics",url:"https://www.stroustrup.com/4th.html"},
+  {type:"Book",name:"Introduction to Algorithms — CLRS",note:"The algorithms bible; memorize complexity proofs",url:"https://mitpress.mit.edu/books/introduction-algorithms-third-edition"},
+  {type:"Tool",name:"LeetCode — 300+ medium/hard problems",note:"Non-negotiable; Tower/Jane Street test this in round 1",url:"https://leetcode.com"},
+  {type:"Tool",name:"Codeforces — competitive programming",note:"Get to 1800+ rating; overlaps with quant aptitude",url:"https://codeforces.com"},
+  {type:"Article",name:"What every programmer should know about memory",note:"Drepper — caches, NUMA, prefetch; essential for HFT",url:"https://people.freebsd.org/~lstewart/articles/cpumemory.pdf"},
+  {type:"Course",name:"MIT 6.006 — Intro to Algorithms (OCW)",note:"Rigorous with full problem sets; free",url:"https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011"},
+  {type:"Book",name:"Fluent Python — Ramalho",note:"Python internals every quant researcher needs",url:"https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348"},
+  {type:"Article",name:"Making Deep Learning Go Brrr — Horace He",note:"Cache, SIMD, memory bandwidth; applies to trading too",url:"https://horace.io/brrr_intro.html"},
+ ],
+ milestones:["Reach 1800 on Codeforces or LeetCode Knight badge","Implement red-black tree from scratch in C++","Write cache-friendly matrix multiply; benchmark GFLOPS","Profile Python hot path; rewrite in Cython/C extension"]},
+
+{id:5,cat:"cs",time:"6–8 wk",name:"Algorithms & Competitive Programming",
+ desc:"Sorting, DP, graph algorithms, segment trees, number theory, game theory — quant aptitude tests are essentially CP contests.",
+ tags:["Dynamic programming","BFS/DFS","Dijkstra","Segment trees","Binary search","Network flow","Number theory","Bitmasking","Game theory","Convex hull trick","Matrix exponentiation","Trie","Union-find","KMP algorithm"],
+ resources:[
+  {type:"Book",name:"Competitive Programming 3 — Halim",note:"Contest bible; covers 95% of quant interview algo topics",url:"https://cpbook.net"},
+  {type:"Book",name:"Art of Problem Solving Vol 1 & 2",note:"AMC/AIME level; builds the brainpower quants need",url:"https://artofproblemsolving.com/store/item/aops-vol1"},
+  {type:"Tool",name:"CSES Problem Set — 400 structured problems",note:"Best structured algo curriculum; all free",url:"https://cses.fi/problemset"},
+  {type:"Book",name:"Algorithm Design — Kleinberg & Tardos",note:"Theory meets practice; greedy, DP, network flow",url:"https://www.pearson.com"},
+  {type:"Tool",name:"AtCoder — high-quality math contests",note:"Best site for quant-style math programming",url:"https://atcoder.jp"},
+  {type:"Book",name:"Algorithmic Puzzles — Levitin & Levitin",note:"Bridge between algo and quant brainteasers",url:"https://www.amazon.com/Algorithmic-Puzzles-Anany-Levitin/dp/0199740445"},
+  {type:"YouTube",name:"Errichto — CP tutorials",note:"Advanced DP, graphs, segment trees",url:"https://www.youtube.com/@Errichto"},
+  {type:"Tool",name:"Project Euler — 800+ math-programming problems",note:"Overlap with quant aptitude tests; do first 100",url:"https://projecteuler.net"},
+ ],
+ milestones:["Solve 200+ LeetCode medium/hard","Complete all 15 CSES DP problems","Win rated Codeforces Div 2 (or top 20%)","Finish first 100 Project Euler problems"]},
+
+{id:6,cat:"stats",time:"6–8 wk",name:"Statistics & Econometrics",
+ desc:"Statistical inference, regression, time series, hypothesis testing, factor models — bread and butter of alpha research.",
+ tags:["MLE","Hypothesis testing","OLS/GLS","ARIMA","GARCH","Factor models","Cointegration","PCA","Bayesian inference","GMM","Instrumental variables","Panel data","Kalman filter","Regime switching"],
+ resources:[
+  {type:"Book",name:"Statistical Inference — Casella & Berger",note:"MLE, hypothesis testing, confidence intervals — rigorous",url:"https://www.amazon.com/Statistical-Inference-George-Casella/dp/0534243126"},
+  {type:"Book",name:"Time Series Analysis — Hamilton",note:"The econometrics standard; ARIMA, VAR, unit roots",url:"https://press.princeton.edu/books/hardcover/9780691042893/time-series-analysis"},
+  {type:"Book",name:"Econometric Analysis — Greene",note:"Regression, panel data, instrumental variables",url:"https://www.pearson.com"},
+  {type:"Book",name:"The Elements of Statistical Learning",note:"ESL — free PDF; the ML/stats bridge",url:"https://hastie.su.domains/ElemStatLearn"},
+  {type:"Book",name:"Bayesian Data Analysis — Gelman et al.",note:"BDA3 — free PDF; hierarchical models",url:"http://www.stat.columbia.edu/~gelman/book"},
+  {type:"Course",name:"MIT 14.382 — Econometrics (OCW)",note:"Graduate course; free",url:"https://ocw.mit.edu/courses/14-382-econometrics-spring-2017"},
+  {type:"Book",name:"Analysis of Financial Time Series — Tsay",note:"GARCH, high-frequency data, realized volatility",url:"https://www.wiley.com/en-us/Analysis+of+Financial+Time+Series%2C+3rd+Edition-p-9780470414354"},
+  {type:"Article",name:"Kalman Filter Tutorial — Welch & Bishop",note:"Practical introduction; used in signal processing",url:"https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf"},
+ ],
+ milestones:["Implement OLS, GLS, 2SLS from scratch in NumPy","Fit GARCH(1,1) on equity returns; test ARCH effects","Build 5-factor alpha model; compute IC and IR","Implement Kalman filter for signal extraction on price data"]},
+
+{id:7,cat:"stats",time:"6–8 wk",name:"Machine Learning for Quant Research",
+ desc:"ML methods that actually work in finance: regularization, ensembles, purged CV, feature engineering on financial data.",
+ tags:["Ridge/Lasso","Random forests","XGBoost/LightGBM","PCA","Clustering","Neural networks","Purged CV","Feature importance","SHAP","Double ML","Causal inference","Conformal prediction","Online learning","Ensemble methods"],
+ resources:[
+  {type:"Book",name:"Advances in Financial ML — Lopez de Prado",note:"THE book for ML in finance; purged CV, labeling, backtest",url:"https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089"},
+  {type:"Book",name:"Machine Learning for Asset Managers — Lopez",note:"Feature importance, hierarchical risk parity",url:"https://www.cambridge.org/core/books/machine-learning-for-asset-managers/6D9211305EA2E425D33A9F38D0AE3545"},
+  {type:"Book",name:"The Elements of Statistical Learning",note:"ESL — theory behind all ML algorithms; free PDF",url:"https://hastie.su.domains/ElemStatLearn"},
+  {type:"Paper",name:"The Deflated Sharpe Ratio — Lopez de Prado",note:"Why most backtests are lies; backtest overfitting math",url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551"},
+  {type:"Tool",name:"scikit-learn documentation",note:"Implement every algorithm from scratch first",url:"https://scikit-learn.org/stable"},
+  {type:"Paper",name:"A Data Science Solution for Predictive Finance",note:"Lopez de Prado — full ML pipeline for finance",url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3400358"},
+  {type:"Book",name:"Causal Inference — Brady Neal",note:"Causality in ML; free; matters for factor research",url:"https://www.bradyneal.com/causal-inference-course"},
+  {type:"YouTube",name:"Lopez de Prado — ML Finance lectures",note:"Full lecture series on YouTube",url:"https://www.youtube.com/@QuantResearch"},
+ ],
+ milestones:["Implement purged k-fold CV on financial time series","Build XGBoost alpha factor; compute out-of-sample IC","Reproduce a Lopez de Prado chapter end-to-end","Run SHAP analysis on a trained financial model"]},
+
+{id:8,cat:"finance",time:"6–8 wk",name:"Market Microstructure & Market Making",
+ desc:"Order books, bid-ask spread, adverse selection, Avellaneda-Stoikov, Kyle model, Glosten-Milgrom — the HFT foundation.",
+ tags:["L2/L3 order book","Bid-ask spread","Adverse selection","Avellaneda-Stoikov","Kyle lambda","Glosten-Milgrom","Inventory risk","Price impact","Amihud illiquidity","VWAP/TWAP","Toxicity measures","OHLCV","Tick data","Latency arbitrage"],
+ resources:[
+  {type:"Book",name:"Market Microstructure Theory — O'Hara",note:"Foundational academic text; adverse selection models",url:"https://www.wiley.com/en-us/Market+Microstructure+Theory-p-9780631207610"},
+  {type:"Paper",name:"Avellaneda & Stoikov — High Frequency Trading",note:"The market making model every HFT desk knows",url:"https://math.nyu.edu/~avellane/HighFrequencyTrading.pdf"},
+  {type:"Book",name:"Algorithmic and HFT — Cartea, Jaimungal, Penalva",note:"Stochastic control for market making and execution",url:"https://www.cambridge.org/core/books/algorithmic-and-highfrequency-trading/B9BC3F9ECA7ADD9E35E62B7F87FF7A31"},
+  {type:"Paper",name:"Kyle 1985 — Continuous Auctions and Insider Trading",note:"Lambda price impact; cited in every HFT paper",url:"https://www.jstor.org/stable/1913210"},
+  {type:"Paper",name:"Glosten-Milgrom 1985 — Bid, Ask Prices",note:"Adverse selection model of the bid-ask spread",url:"https://www.sciencedirect.com/science/article/pii/0304405X85900443"},
+  {type:"Book",name:"Trading and Exchanges — Larry Harris",note:"Accessible introduction to exchange mechanics",url:"https://www.oup.com/academic/product/trading-and-exchanges-9780195144703"},
+  {type:"Paper",name:"Amihud 2002 — Illiquidity and Stock Returns",note:"Amihud ratio; standard measure of market impact",url:"https://www.sciencedirect.com/science/article/pii/S0927539802000291"},
+  {type:"Article",name:"Nasdaq ITCH Protocol Specification",note:"Learn the actual L3 data format used in practice",url:"https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHspecification.pdf"},
+ ],
+ milestones:["Implement Avellaneda-Stoikov market maker simulator","Estimate Kyle lambda on L3 order book data","Build VWAP execution algo; measure slippage vs benchmark","Compute Amihud illiquidity ratio for a stock universe"]},
+
+{id:9,cat:"finance",time:"6–8 wk",name:"Portfolio Theory & Risk Management",
+ desc:"Markowitz, factor models, risk decomposition, tail risk, CVaR, drawdown optimization, Kelly criterion.",
+ tags:["Markowitz MVO","CAPM","Fama-French","Kelly criterion","VaR/CVaR","Max drawdown","Risk parity","HRP","Ledoit-Wolf","Copulas","Extreme value theory","Black-Litterman","Factor attribution","Correlation breakdown"],
+ resources:[
+  {type:"Book",name:"Active Portfolio Management — Grinold & Kahn",note:"Fundamental Law of Active Management; alpha/IR",url:"https://www.amazon.com/Active-Portfolio-Management-Quantitative-Controlling/dp/0070248826"},
+  {type:"Book",name:"Quantitative Risk Management — McNeil et al.",note:"Copulas, EVT, VaR/CVaR — rigorous",url:"https://press.princeton.edu/books/hardcover/9780691166278/quantitative-risk-management"},
+  {type:"Paper",name:"Hierarchical Risk Parity — Lopez de Prado",note:"Modern alternative to Markowitz; used by quant funds",url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2708678"},
+  {type:"Book",name:"Fortune's Formula — Poundstone",note:"Kelly criterion history — readable and deep",url:"https://www.amazon.com/Fortunes-Formula-Scientific-Betting-Casinos/dp/0809045990"},
+  {type:"Paper",name:"Ledoit-Wolf Shrinkage Estimator",note:"Shrinking sample covariance; used in every production portfolio",url:"https://www.sciencedirect.com/science/article/pii/S0047259X03000964"},
+  {type:"Paper",name:"Black-Litterman Model — He & Litterman 1999",note:"Bayesian approach to portfolio construction",url:"https://www.blackrock.com"},
+  {type:"Tool",name:"PyPortfolioOpt",note:"Practical portfolio optimization in Python",url:"https://pyportfolioopt.readthedocs.io"},
+  {type:"Paper",name:"Fama-French Three-Factor Model 1993",note:"Benchmark of all factor models; read the original",url:"https://www.sciencedirect.com/science/article/pii/0304405X93900235"},
+ ],
+ milestones:["Build MVO optimizer with Ledoit-Wolf shrinkage","Implement HRP; compare OOS Sharpe to Markowitz","Compute CVaR via historical simulation and parametric","Fit a copula to equity tail dependencies"]},
+
+{id:10,cat:"algo",time:"8–10 wk",name:"Quantitative Strategy Design",
+ desc:"Alpha research methodology — signal generation, IC/IR, cross-sectional strategies, stat arb, mean reversion, trend following.",
+ tags:["Alpha signals","IC/IR","Factor zoo","Cross-sectional momentum","Statistical arbitrage","Pairs trading","Mean reversion","Trend following","Carry","Value","Quality","Low volatility","Alpha decay","Turnover"],
+ resources:[
+  {type:"Book",name:"Expected Returns — Antti Ilmanen",note:"Best practitioner survey of return drivers; 600 pages",url:"https://www.wiley.com/en-us/Expected+Returns-p-9781119990727"},
+  {type:"Paper",name:"Dissecting Anomalies — Fama & French 2008",note:"Which factors survive after controlling for size/value?",url:"https://www.jstor.org/stable/27648081"},
+  {type:"Paper",name:"Returns to Buying Winners Selling Losers",note:"Jegadeesh & Titman 1993 — momentum effect",url:"https://www.jstor.org/stable/2328882"},
+  {type:"Paper",name:"Statistical Arbitrage in US Equities — Avellaneda",note:"Eigenportfolio mean reversion strategy",url:"https://math.nyu.edu/~avellane/AvellanedaLeeStatArb20090616.pdf"},
+  {type:"Book",name:"Quantitative Momentum — Gray & Vogel",note:"Practitioner momentum with real portfolio construction",url:"https://www.amazon.com/Quantitative-Momentum-Practitioners-Momentum-Based-Selection/dp/111923719X"},
+  {type:"Tool",name:"Alphalens — factor analysis toolkit",note:"IC, turnover, returns analysis for alpha signals",url:"https://github.com/quantopian/alphalens"},
+  {type:"Paper",name:"Value and Momentum Everywhere — Asness et al.",note:"AQR 2013 — cross-asset value/momentum",url:"https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere"},
+  {type:"Tool",name:"Zipline-Reloaded / Backtrader",note:"Event-driven backtesting frameworks",url:"https://www.backtrader.com"},
+  {type:"Article",name:"The Replication Crisis in Finance — Harvey",note:"Why 300+ factors are mostly noise; essential reading",url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2884054"},
+ ],
+ milestones:["Design 3 original alpha factors; compute IC on 5yr data","Build pairs trading strategy with cointegration testing","Write full strategy memo: signal, risk, capacity, costs","Reproduce momentum strategy on real data with transaction costs"]},
+
+{id:11,cat:"trading",time:"8–10 wk",name:"Trading Systems & Low-Latency Infrastructure",
+ desc:"Low-latency C++, FIX protocol, OMS, co-location, kernel bypass networking, lock-free structures, CPU optimization.",
+ tags:["Low-latency C++","FIX protocol","OMS/EMS","Co-location","Kernel bypass","DPDK","Lock-free queues","Ring buffers","CPU affinity","NUMA","Cache lines","Branch prediction","Memory-mapped IO","FPGA basics"],
+ resources:[
+  {type:"Book",name:"Art of Writing Efficient Programs — Pikus",note:"Low-latency C++ optimization; cache, SIMD, profiling",url:"https://www.packtpub.com/product/the-art-of-writing-efficient-programs/9781800208117"},
+  {type:"Book",name:"C++ High Performance — Andrist & Sehr",note:"Modern C++ for latency-sensitive systems",url:"https://www.packtpub.com/product/c-high-performance-second-edition/9781839216541"},
+  {type:"Article",name:"What every programmer should know about memory",note:"Drepper — CPU caches, NUMA, prefetch; essential for HFT",url:"https://people.freebsd.org/~lstewart/articles/cpumemory.pdf"},
+  {type:"Article",name:"Lock-free data structures — 1024cores.net",note:"SPSC/MPMC queues in trading systems",url:"https://www.1024cores.net"},
+  {type:"Book",name:"Inside the Machine — Jon Stokes",note:"CPU microarchitecture — pipelines, OOO, branch prediction",url:"https://www.amazon.com/Inside-Machine-Introduction-Microprocessors-Architecture/dp/1593276680"},
+  {type:"Docs",name:"DPDK — Data Plane Development Kit",note:"Kernel-bypass networking used in modern HFT stacks",url:"https://www.dpdk.org"},
+  {type:"Article",name:"Martin Thompson — Mechanical Sympathy blog",note:"Low-latency patterns; LMAX Disruptor author",url:"https://mechanical-sympathy.blogspot.com"},
+  {type:"YouTube",name:"CppCon — Low Latency talks",note:"CppCon talks on HFT C++ techniques",url:"https://www.youtube.com/@CppCon"},
+  {type:"Article",name:"Wilmott — Practical Quant Infrastructure",note:"Infrastructure overview for quant trading systems",url:"https://www.wilmott.com"},
+ ],
+ milestones:["Implement lock-free SPSC queue with nanosecond benchmarks","Build FIX protocol message parser in C++","Write toy order matching engine (10M orders/sec target)","Benchmark cache misses with perf; optimize hot paths"]},
+
+{id:12,cat:"trading",time:"6–8 wk",name:"Execution Algorithms & Optimal Control",
+ desc:"Almgren-Chriss execution, TWAP/VWAP, IS minimization, RL for execution, dark pools, smart order routing.",
+ tags:["Almgren-Chriss","TWAP","VWAP","Implementation shortfall","RL for execution","Optimal stopping","Dark pools","Smart order routing","Iceberg orders","Slippage","Market impact","POV","Adaptive algos","Participation rate"],
+ resources:[
+  {type:"Paper",name:"Optimal Execution — Almgren & Chriss",note:"The canonical execution optimization model",url:"https://www.math.nyu.edu/~almgren/papers/optliq.pdf"},
+  {type:"Paper",name:"Optimal Control of Execution Costs — Bertsimas",note:"Dynamic programming for optimal execution",url:"https://www.jstor.org/stable/3010598"},
+  {type:"Paper",name:"RL for Market Making — Spooner",note:"RL applied to execution and market making",url:"https://arxiv.org/abs/1804.04216"},
+  {type:"Book",name:"Dynamic Programming & Optimal Control — Bertsekas",note:"The DP bible; Vol I and II",url:"http://www.athenasc.com/dpbook.html"},
+  {type:"Paper",name:"Smart Order Routing — Foucault & Menkveld",note:"Fragmented markets and SOR design",url:"https://www.jstor.org/stable/20108956"},
+  {type:"Paper",name:"Cartea & Jaimungal — Execution with Limit Orders",note:"Stochastic control execution with LOBs",url:"https://www.cambridge.org/core/books/algorithmic-and-highfrequency-trading/B9BC3F9ECA7ADD9E35E62B7F87FF7A31"},
+  {type:"Tool",name:"gym-trading-env",note:"RL environment for trading strategy research",url:"https://github.com/ClementPerroud/Gym-Trading-Env"},
+ ],
+ milestones:["Implement Almgren-Chriss liquidation schedule optimizer","Simulate VWAP vs IS on real intraday data","Train RL agent to minimize execution cost in simulation","Build SOR routing across 2 simulated venues"]},
+
+{id:13,cat:"practice",time:"Ongoing",name:"Interview Preparation & Portfolio",
+ desc:"Probability puzzles, brainteasers, market making games, case studies, mock interviews, mental math — the final gauntlet.",
+ tags:["Green book problems","Probability puzzles","Brainteasers","Market making game","Fermi estimation","Mental math","Case studies","Networking","Resume for quant","Expected value puzzles","Card problems","Dice problems","DP puzzles","Mock interviews"],
+ resources:[
+  {type:"Book",name:"Practical Guide to Quant Interviews — Xinfeng Zhou",note:"The Green Book — single most important quant interview book",url:"https://www.amazon.com/Practical-Guide-Quantitative-Finance-Interviews/dp/1438236662"},
+  {type:"Book",name:"Heard on the Street — Timothy Falcon Crack",note:"200 quant interview questions with full solutions",url:"https://www.amazon.com/Heard-Street-Quantitative-Questions-Interviews/dp/0994103727"},
+  {type:"Book",name:"Quant Job Interview Questions — Mark Joshi",note:"Derivatives, probability, and coding questions",url:"https://www.amazon.com/Quant-Interview-Questions-Answers-second/dp/0987122827"},
+  {type:"Book",name:"Problems in Probability — Shiryaev",note:"600 problems; great for probabilistic intuition",url:"https://www.amazon.com/Problems-Probability-Problem-Books-Mathematics/dp/1461436877"},
+  {type:"Tool",name:"Jane Street Practice Puzzles",note:"Free monthly puzzles — work every single one",url:"https://www.janestreet.com/puzzles"},
+  {type:"Tool",name:"Optiver ReadyTrader GO",note:"Live market making competition run by Optiver",url:"https://readytradergo.optiver.com"},
+  {type:"Tool",name:"QuantLib — Industry Library",note:"Contribute to it; shows employers quant code experience",url:"https://www.quantlib.org"},
+  {type:"Article",name:"Tower Research Capital Glassdoor Interviews",note:"Real interview experiences and prep tips",url:"https://www.glassdoor.com/Interview/Tower-Research-Capital-Interview-Questions-E288134.htm"},
+  {type:"Article",name:"How to get into Quant Finance — QuantNet",note:"LinkedIn, referrals, MFE programs, networking",url:"https://quantnet.com/threads/how-to-get-into-quantitative-finance.21396"},
+  {type:"Book",name:"My Life as a Quant — Emanuel Derman",note:"Career narrative; what being a quant actually is like",url:"https://www.amazon.com/My-Life-Quant-Reflections-Physics/dp/0470192739"},
+ ],
+ milestones:["Solve all 150 Green Book problems (timed)","Win or place top 10% in Optiver ReadyTraderGO","Complete 10 timed mock interviews","Build public GitHub with 3 reproducible quant projects"]},
+];
+
+const CAT={
+  math:{label:"MATH",text:"#00e5ff",dot:"d-math"},
+  cs:{label:"CS / PROG",text:"#ffb800",dot:"d-cs"},
+  stats:{label:"STATS / ML",text:"#cc66ff",dot:"d-stats"},
+  finance:{label:"FINANCE",text:"#00ff41",dot:"d-finance"},
+  algo:{label:"ALGO / STRAT",text:"#ff6666",dot:"d-algo"},
+  trading:{label:"TRADING SYS",text:"#66ffcc",dot:"d-trading"},
+  practice:{label:"PRACTICE",text:"#ffcc00",dot:"d-practice"}
+};
+const BADGE={Paper:"rb-paper",Book:"rb-book",Course:"rb-course",Article:"rb-article",YouTube:"rb-youtube",Tool:"rb-tool",Docs:"rb-docs"};
+
+let activeCat="all",activeType="All",activeTag=null,searchQ="";
+let done=new Set();
+
+function buildTagCloud(){
+  const all=[];
+  DATA.forEach(p=>p.tags.forEach(t=>{if(!all.includes(t))all.push(t)}));
+  const cloud=document.getElementById("tag-cloud");
+  all.forEach(t=>{
+    const s=document.createElement("span");
+    s.className="tag-pill";s.textContent=t;
+    s.onclick=()=>toggleTag(t,s);
+    cloud.appendChild(s);
+  });
+}
+
+function toggleTag(t,el){
+  if(activeTag===t){activeTag=null;el.classList.remove("active");}
+  else{document.querySelectorAll(".tag-pill").forEach(x=>x.classList.remove("active"));activeTag=t;el.classList.add("active");}
+  applyFilters();
+}
+
+function updateCounters(){
+  const topics=new Set();let res=0;
+  DATA.forEach(p=>{p.tags.forEach(t=>topics.add(t));res+=p.resources.length;});
+  animCount("topic-count",topics.size);animCount("res-count",res);
+}
+function animCount(id,target){
+  const el=document.getElementById(id);let n=0;
+  const step=Math.ceil(target/40);
+  const iv=setInterval(()=>{n=Math.min(n+step,target);el.textContent=n;if(n>=target)clearInterval(iv);},30);
+}
+
+function render(){
+  const c=document.getElementById("phases-container");c.innerHTML="";
+  DATA.forEach((p,i)=>{
+    const cfg=CAT[p.cat]||CAT.math;
+    const el=document.createElement("div");
+    el.className="phase"+(done.has(p.id)?" done":"");
+    el.id="phase-"+p.id;
+    el.style.animationDelay=(i*0.03)+"s";
+    const typeSet=[...new Set(p.resources.map(r=>r.type))];
+    el.innerHTML=`
+<div class="phase-head" onclick="togglePhase(${p.id})">
+  <div class="ph-id">PHASE<br>${String(p.id).padStart(2,"0")}</div>
+  <div class="ph-dot-col"><div class="ph-dot ${cfg.dot}" style="border-color:${cfg.text}"></div></div>
+  <div class="ph-main">
+    <div class="ph-cat" style="color:${cfg.text}">${cfg.label}</div>
+    <div class="phase-name">${p.name}</div>
+    <div class="ph-desc">${p.desc}</div>
+    <div class="ph-tags">${p.tags.slice(0,8).map(t=>`<span class="ptag">${t}</span>`).join("")}${p.tags.length>8?`<span class="ptag">+${p.tags.length-8}</span>`:""}</div>
+  </div>
+  <div class="ph-badge">[ DONE ✓ ]</div>
+  <div class="ph-time">${p.time}</div>
+  <div class="ph-chev">▼</div>
+</div>
+<div class="phase-body">
+  <div class="body-layout">
+    <div>
+      <div class="sec-head">Resources &amp; Papers</div>
+      <div class="res-type-tabs" id="rtt-${p.id}">
+        <button class="rtt on" onclick="filterResType(${p.id},'All',this)">All (${p.resources.length})</button>
+        ${typeSet.map(t=>`<button class="rtt" onclick="filterResType(${p.id},'${t}',this)">${t} (${p.resources.filter(r=>r.type===t).length})</button>`).join("")}
+      </div>
+      <div class="resources" id="res-${p.id}">
+        ${p.resources.map(r=>`<a class="res-card" href="${r.url}" target="_blank" rel="noopener" data-type="${r.type}">
+          <span class="rb ${BADGE[r.type]||'rb-docs'}">${r.type}</span>
+          <div class="res-name">${r.name}</div>
+          <div class="res-note">${r.note}</div>
+          <div class="res-arrow">OPEN ↗</div>
+        </a>`).join("")}
+      </div>
+    </div>
+    <div>
+      <div class="sec-head">Build Milestones</div>
+      <div class="milestones-box">
+        ${p.milestones.map(m=>`<div class="m-item"><span class="m-arr" style="color:${cfg.text}">▶</span>${m}</div>`).join("")}
+      </div>
+      <button class="mark-btn" onclick="markDone(${p.id},event)">${done.has(p.id)?"[ MARK INCOMPLETE ]":"[ MARK COMPLETE ]"}</button>
+    </div>
+  </div>
+</div>`;
+    c.appendChild(el);
+  });
+  applyFilters();
+}
+
+function togglePhase(id){document.getElementById("phase-"+id).classList.toggle("open");}
+
+function filterResType(pid,type,btn){
+  document.querySelectorAll(`#rtt-${pid} .rtt`).forEach(b=>b.classList.remove("on"));
+  btn.classList.add("on");
+  document.querySelectorAll(`#res-${pid} .res-card`).forEach(c=>{
+    c.classList.toggle("hidden",type!=="All"&&c.dataset.type!==type);
+  });
+}
+
+function markDone(id,e){
+  e.stopPropagation();
+  if(done.has(id))done.delete(id);else done.add(id);
+  const el=document.getElementById("phase-"+id);
+  el.classList.toggle("done",done.has(id));
+  el.querySelector(".mark-btn").textContent=done.has(id)?"[ MARK INCOMPLETE ]":"[ MARK COMPLETE ]";
+  const n=done.size;
+  document.getElementById("done-count").textContent=n;
+  document.getElementById("prog-fill").style.width=(n/DATA.length*100)+"%";
+  document.getElementById("prog-txt").textContent=n+" / "+DATA.length+" phases complete";
+}
+
+function setFilter(cat,el){
+  activeCat=cat;
+  document.querySelectorAll(".sb-link").forEach(x=>x.classList.remove("active"));
+  if(el)el.classList.add("active");
+  applyFilters();
+}
+
+function setGlobalType(type,btn){
+  activeType=type;
+  document.querySelectorAll(".tf").forEach(b=>b.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  // also highlight sidebar type
+  applyFilters();
+}
+
+function doSearch(q){searchQ=q.toLowerCase();applyFilters();}
+
+function applyFilters(){
+  DATA.forEach(p=>{
+    const el=document.getElementById("phase-"+p.id);if(!el)return;
+    const catOk=activeCat==="all"||p.cat===activeCat;
+    const tagOk=!activeTag||p.tags.some(t=>t===activeTag);
+    const text=(p.name+" "+p.desc+" "+p.tags.join(" ")+" "+p.resources.map(r=>r.name+" "+r.note).join(" ")).toLowerCase();
+    const qOk=!searchQ||text.includes(searchQ);
+    const typeOk=activeType==="All"||p.resources.some(r=>r.type===activeType);
+    el.classList.toggle("hidden",!(catOk&&tagOk&&qOk&&typeOk));
+    if(activeType!=="All"){
+      document.querySelectorAll(`#res-${p.id} .res-card`).forEach(c=>{
+        c.classList.toggle("hidden",c.dataset.type!==activeType);
+      });
+    } else {
+      document.querySelectorAll(`#res-${p.id} .res-card`).forEach(c=>c.classList.remove("hidden"));
+    }
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  document.getElementById("back-top").classList.toggle("show",window.scrollY>400);
+});
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"});}
+function jumpTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});}
+
+buildTagCloud();render();updateCounters();
+</script>
+</body>
+</html>
